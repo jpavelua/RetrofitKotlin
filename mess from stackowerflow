@@ -1,0 +1,8 @@
+Hi there!
+I think your problem is in MainViewModel.kt in #13 line.
+You use viewModelScope.launch { ... } - this is not a scope for background process. This is a scope of ViewModel-object living time to hold your data in VM
+You should use 
+
+CoroutineScope(Dispatchers.IO).launch { ... }
+
+This is real background process than is needed for web-communications
